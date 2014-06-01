@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://yui.yahooapis.com/3.17.1/build/yui/yui-min.js"></script>
+        <title></title>
+    </head>
+    <body>
+        <script>
+            YUI({
+                modules: {
+                    'ns5': {
+                        fullpath: '../../src/js/ns5.js'
+                    },
+                    'ns5-tests': {
+                        fullpath: 'js/ns5-tests.js',
+                        requires: [ 'test', 'ns5' ]
+                    }
+                }
+            }).use('ns5-tests', function (Y) {
+                Y.Test.Runner.run();
+            });
+        </script>
+    </body>
+</html>
