@@ -42,6 +42,46 @@ suite.add(new Y.Test.Case({
     }
 }));
 
+suite.add(new Y.Test.Case({
+
+    name: '.test(thing)',
+
+    'should pass if thing is not an object': function () {
+        var ns5 = new NS5({});
+        Y.Assert.isTrue(ns5.test("foobar"));
+    },
+
+    'should fail if thing is not valid': function () {
+        var ns5 = new NS5({
+            foo: function () {
+                return false; // automatically fails foo
+            },
+            bar: function () {
+                return true; // automatically passes bar
+            }
+        });
+        Y.Assert.isFalse(ns5.test({ foo: 1, bar: 1 }));
+    },
+
+    'should pass if thing is valid': function () {
+        var ns5 = new NS5({
+            foo: function () {
+                return true; // automatically passes foo
+            }
+        });
+        Y.Assert.isTrue(ns5.test({ foo: 1 }));
+    },
+
+    'unknown data automatically pass': function () {
+        var ns5 = new NS5({
+            foo: function () {
+                return false;
+            }
+        });
+        Y.Assert.isTrue(ns5.test({ xxx: 1 }));
+    }
+}));
+
 Y.Test.Runner.add(suite);
 
 });
