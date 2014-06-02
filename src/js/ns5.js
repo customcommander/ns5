@@ -60,6 +60,18 @@ NS5.isFunction = function (thing) {
 };
 
 /**
+ * Checks whether a thing is an array
+ *
+ * @method isArray
+ * @param thing {Any} The value to test.
+ * @return {Boolean}
+ * @static
+ */
+NS5.isArray = Array.isArray || function (thing) {
+    return Object.prototype.toString.call(thing) === '[object Array]';
+};
+
+/**
  * Checks whether a thing is valid.
  *
  * If `thing` is not an object, NS5 automatically passes the test. If NS5 doesn't

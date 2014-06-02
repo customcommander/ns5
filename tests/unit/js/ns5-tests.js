@@ -81,6 +81,11 @@ suite.add(new Y.Test.Case({
     'test: NS5.isFunction': function () {
         Y.Assert.isTrue(NS5.isFunction(function () {}), "expected 'function () {}' to have succeeded");
         Y.Assert.isFalse(NS5.isFunction([])           , "expected '[]' to have failed");
+    },
+
+    'test: NS5.isArray': function () {
+        Y.Assert.isTrue(NS5.isArray([]) , "expected '[]' to have succeeded");
+        Y.Assert.isFalse(NS5.isArray({}), "expected '{}' to have failed");
     }
 }));
 
