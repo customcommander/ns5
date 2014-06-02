@@ -66,23 +66,23 @@ NS5.isFunction = function (thing) {
  * know how to check a value it assumes the value is correct.
  *
  * @example
- *    var ns5 = new NS5({
- *        foo: function (val) {
- *            return val === 'bar';
- *        }
- *    });
+ *     var ns5 = new NS5({
+ *         foo: function (val) {
+ *             return val === 'bar';
+ *         }
+ *     });
  *
- *    ns5.test(99);
- *    //=> true
+ *     ns5.test(99);
+ *     //=> true
  *
- *    ns5.test({ foo: 'xxx' });
- *    //=> false
+ *     ns5.test({ foo: 'xxx' });
+ *     //=> false
  *
- *    ns5.test({ foo: 'bar' });
- *    //=> true
+ *     ns5.test({ foo: 'bar' });
+ *     //=> true
  *
- *    ns5.test({ xxx: 'yyy' });
- *    //=> true
+ *     ns5.test({ xxx: 'yyy' });
+ *     //=> true
  *
  * @method test
  * @param thing {Object}
