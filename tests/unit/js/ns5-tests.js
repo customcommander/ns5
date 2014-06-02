@@ -42,6 +42,19 @@ suite.add(new Y.Test.Case({
 
         ns5.test({ foo: 1 });
         Y.Mock.verify(mock);
+    },
+
+    'should not return a truthy value to validate': function () {
+        var ns5 = new NS5({
+                foo: function () { return 1;       },
+                bar: function () { return [];      },
+                baz: function () { return "hello"; },
+                bat: function () { return {};      }
+            });
+        Y.Assert.isFalse(ns5.test({ foo: 'xxx' }), "should have rejected 1");
+        Y.Assert.isFalse(ns5.test({ bar: 'xxx' }), "should have rejected []");
+        Y.Assert.isFalse(ns5.test({ baz: 'xxx' }), "should have rejected 'hello'");
+        Y.Assert.isFalse(ns5.test({ bat: 'xxx' }), "should have rejected {}");
     }
 }));
 

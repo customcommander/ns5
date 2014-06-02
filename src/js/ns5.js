@@ -74,7 +74,7 @@ NS5.prototype.test = function (thing) {
 
     for (key in thing) {
         validator = get_validator(this._schema, key);
-        if ( !validator(thing[key]) ) {
+        if ( validator(thing[key]) !== true ) {
             return false;
         }
     }
