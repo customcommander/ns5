@@ -48,6 +48,18 @@ NS5.isString = function (thing) {
 };
 
 /**
+ * Checks whether a thing is a function.
+ *
+ * @method isFunction
+ * @param thing {Any} The value to test.
+ * @return {Boolean}
+ * @static
+ */
+NS5.isFunction = function (thing) {
+    return typeof thing === 'function';
+};
+
+/**
  * Checks whether a thing is valid.
  *
  * If `thing` is not an object, NS5 automatically passes the test. If NS5 doesn't
