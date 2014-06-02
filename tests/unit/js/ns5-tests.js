@@ -70,6 +70,12 @@ suite.add(new Y.Test.Case({
         Y.Assert.isFalse(NS5.isObject(null)      , "expected 'null' to have failed");
         Y.Assert.isFalse(NS5.isObject([])        , "expected '[]' to have failed");
         Y.Assert.isFalse(NS5.isObject(new Date()), "expected 'new Date()' to have failed");
+    },
+
+    'test: NS5.isString': function () {
+        Y.Assert.isTrue(NS5.isString("")  , "expected '' (empty string) to have succeeded");
+        Y.Assert.isTrue(NS5.isString("hi"), "expected 'hi' to have succeeded");
+        Y.Assert.isFalse(NS5.isString([]) , "expected '[]' to have failed");
     }
 }));
 
