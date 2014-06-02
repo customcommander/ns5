@@ -72,6 +72,33 @@ NS5.isArray = Array.isArray || function (thing) {
 };
 
 /**
+ * Registers a validator globally.
+ *
+ * @method register
+ * @param fn_name {String} The validator name.
+ * @param fn {Function} The validator function itself.
+ * @param [args] {Array} Additional parameters to pass on to the validator.
+ * @static
+ */
+NS5.register = function (fn_name, fn, args) {
+
+    fn_name = NS5.isString(fn_name) ? fn_name : null;
+    fn      = NS5.isFunction(fn)    ? fn      : null;
+    args    = NS5.isArray(args)     ? args    : [];
+
+    // bail if validator details are wrong or already exist.
+    if (!fn_name || !fn || NS5[fn_name]) {
+        return false;
+    }
+
+    NS5[fn_name] = function (val) {
+        return fn.apply(null, [val].concat(args));
+    };
+
+    return NS5[fn_name];
+};
+
+/**
  * Checks whether a thing is valid.
  *
  * If `thing` is not an object, NS5 automatically passes the test. If NS5 doesn't

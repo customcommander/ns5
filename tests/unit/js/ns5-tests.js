@@ -91,6 +91,54 @@ suite.add(new Y.Test.Case({
 
 suite.add(new Y.Test.Case({
 
+    name: 'NS5.register(fn_name, fn[, args])',
+
+    'should fail if fn_name is not valid': function () {
+        Y.Assert.isFalse(NS5.register([]), "expected '[]' to have failed");
+        Y.Assert.isFalse(NS5.register(''), "expected '' (empty string) to have failed");
+    },
+
+    'should fail if fn is not valid': function () {
+        var fn_name = Y.guid('test');
+        Y.Assert.isFalse(NS5.register(fn_name, []), "expected '[]' to have failed");
+    },
+
+    'should fail if validator already exists': function () {
+
+        var fn_name;
+
+        Y.Assert.isFalse(NS5.register('isString', function () {}),
+            "expected attempt at overriding default validator to have failed");
+
+        fn_name = Y.guid('test');
+        NS5.register(fn_name, function () {});
+
+        Y.Assert.isFalse(NS5.register(fn_name, function () {}),
+            "expected attempt at overriding custom validator to have failed");
+    },
+
+    'should register a custom validator': function () {
+        var fn_name = Y.guid('test');
+        NS5.register(fn_name, function () {});
+        Y.Assert.isFunction(NS5[fn_name]);
+    },
+
+    'should pass registered arguments on to the validator': function () {
+
+        var fn_name = Y.guid('test'), ns5;
+
+        NS5.register(fn_name, function () {
+            return Y.Array(arguments).join(',') === 'foo,bar,baz';
+        }, ['bar', 'baz']);
+
+        ns5 = new NS5({ foo: NS5[fn_name] });
+
+        Y.Assert.isTrue( ns5.test({ foo: 'foo' }) );
+    }
+}));
+
+suite.add(new Y.Test.Case({
+
     name: '.test(thing)',
 
     'should pass if thing is not an object': function () {
