@@ -29,6 +29,24 @@ suite.add(new Y.Test.Case({
 
 suite.add(new Y.Test.Case({
 
+    name: 'validator function',
+
+    'should receive the value to test as the first argument': function () {
+        var mock = Y.Mock({ foo: function () {} });
+        var ns5  = new NS5(mock);
+
+        Y.Mock.expect(mock, {
+            method: 'foo',
+            args: [1]
+        });
+
+        ns5.test({ foo: 1 });
+        Y.Mock.verify(mock);
+    }
+}));
+
+suite.add(new Y.Test.Case({
+
     name: 'built-in validators',
 
     'test: NS5.isObject': function () {
