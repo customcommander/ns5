@@ -104,6 +104,20 @@ NS5.isArray = Array.isArray || function (thing) {
 };
 
 /**
+ * Checks whether a thing is a number.
+ *
+ * Please note that this function will return true for `NaN`, `Infinity` and `-Infinity`.
+ *
+ * @method isNumber
+ * @param thing {Any} The value to test.
+ * @return {Boolean}
+ * @static
+ */
+NS5.isNumber = function (thing) {
+    return typeof thing === 'number';
+};
+
+/**
  * Registers a validator globally.
  *
  * @method register

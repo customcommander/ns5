@@ -123,6 +123,15 @@ suite.add(new Y.Test.Case({
         Y.Assert.isFalse(NS5.isBoolean("0")       , "falsy '0' failure");
         Y.Assert.isFalse(NS5.isBoolean(null)      , "falsy null failure");
         Y.Assert.isFalse(NS5.isBoolean(undefined) , "falsy undefined failure");
+    },
+
+    'test: NS5.isNumber': function () {
+        Y.Assert.isTrue(NS5.isNumber(1)        , "expected 1 to be a number");
+        Y.Assert.isTrue(NS5.isNumber(NaN)      , "expected NaN to be a number");
+        Y.Assert.isTrue(NS5.isNumber(Infinity) , "expected Infinity to be a number");
+        Y.Assert.isTrue(NS5.isNumber(-Infinity), "expected -Infinity to be a number");
+        Y.Assert.isFalse(NS5.isNumber([])      , "an array is not a number");
+        Y.Assert.isFalse(NS5.isNumber("1")     , "a number withing a string is not a number");
     }
 }));
 
