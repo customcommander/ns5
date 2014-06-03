@@ -68,6 +68,18 @@ NS5.isString = function (thing) {
 };
 
 /**
+ * Checks whether a thing is a boolean.
+ *
+ * @method isBoolean
+ * @param thing {Any} The value to test.
+ * @return {Boolean}
+ * @static
+ */
+NS5.isBoolean = function (thing) {
+    return thing === true || thing === false;
+};
+
+/**
  * Checks whether a thing is a function.
  *
  * @method isFunction

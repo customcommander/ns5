@@ -109,6 +109,20 @@ suite.add(new Y.Test.Case({
     'test: NS5.isArray': function () {
         Y.Assert.isTrue(NS5.isArray([]) , "expected '[]' to have succeeded");
         Y.Assert.isFalse(NS5.isArray({}), "expected '{}' to have failed");
+    },
+
+    'test: NS5.isBoolean': function () {
+        Y.Assert.isTrue(NS5.isBoolean(true) , "expected true to be a boolean");
+        Y.Assert.isTrue(NS5.isBoolean(false), "expected false to be a boolean");
+
+        Y.Assert.isFalse(NS5.isBoolean(1)  , "truthy 1 failure");
+        Y.Assert.isFalse(NS5.isBoolean("1"), "truthy '1' failure");
+        Y.Assert.isFalse(NS5.isBoolean([]) , "truthy [] failure");
+
+        Y.Assert.isFalse(NS5.isBoolean(0)         , "falsy 0 failure");
+        Y.Assert.isFalse(NS5.isBoolean("0")       , "falsy '0' failure");
+        Y.Assert.isFalse(NS5.isBoolean(null)      , "falsy null failure");
+        Y.Assert.isFalse(NS5.isBoolean(undefined) , "falsy undefined failure");
     }
 }));
 
