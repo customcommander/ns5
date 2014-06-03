@@ -132,6 +132,15 @@ suite.add(new Y.Test.Case({
         Y.Assert.isTrue(NS5.isNumber(-Infinity), "expected -Infinity to be a number");
         Y.Assert.isFalse(NS5.isNumber([])      , "an array is not a number");
         Y.Assert.isFalse(NS5.isNumber("1")     , "a number withing a string is not a number");
+    },
+
+    'test: NS5.isFiniteNumber': function () {
+        Y.Assert.isTrue(NS5.isFiniteNumber(1)         , "expected 1 to be a number");
+        Y.Assert.isFalse(NS5.isFiniteNumber(NaN)      , "expected NaN not to be a finite number");
+        Y.Assert.isFalse(NS5.isFiniteNumber(Infinity) , "expected Infinity not to be a finite number");
+        Y.Assert.isFalse(NS5.isFiniteNumber(-Infinity), "expected -Infinity not to be a finite number");
+        Y.Assert.isFalse(NS5.isFiniteNumber([])       , "an array is not a number");
+        Y.Assert.isFalse(NS5.isFiniteNumber("1")      , "a number withing a string is not a number");
     }
 }));
 

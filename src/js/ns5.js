@@ -118,6 +118,22 @@ NS5.isNumber = function (thing) {
 };
 
 /**
+ * Checks whether a thing is a finite number. (i.e. a number that is neither `NaN`, `Infinity` or `-Infinity`)
+ *
+ * @example
+ *      NS5.isNumber(NaN);       //true
+ *      NS5.isFiniteNumber(NaN); //false
+ *
+ * @method isFiniteNumber
+ * @param thing {Any} The value to test.
+ * @return {Boolean}
+ * @static
+ */
+NS5.isFiniteNumber = function (thing) {
+    return typeof thing === 'number' && isFinite(thing);
+};
+
+/**
  * Registers a validator globally.
  *
  * @method register
