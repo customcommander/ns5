@@ -24,6 +24,29 @@ suite.add(new Y.Test.Case({
         assert_it_throws("");
         assert_it_throws("foo");
         assert_it_throws(function () {});
+    },
+
+    'a validator can be the name of a known function': function () {
+        var ns5 = new NS5({ foo: 'isString' });
+        Y.Assert.isFalse( ns5.test({ foo: 1 }) );
+    },
+
+    'a validator can be a value': function () {
+
+        var ns5;
+
+        ns5 = new NS5({ foo: 'bar' });
+        Y.Assert.isFalse(ns5.test({ foo: 1 })   , "expected to have failed because foo is not bar");
+        Y.Assert.isTrue(ns5.test({ foo: 'bar' }), "expected to have succeeded because foo is bar");
+
+        ns5 = new NS5({ foo: 0 });
+        Y.Assert.isTrue(ns5.test({ foo: 0 }), "expected to have succeeded because foo is 0");
+
+        ns5 = new NS5({ foo: false });
+        Y.Assert.isTrue(ns5.test({ foo: false }), "expected to have succeeded because foo is false");
+
+        ns5 = new NS5({ foo: 0 });
+        Y.Assert.isFalse(ns5.test({ foo: '0' }), "value validator should use strict equality");
     }
 }));
 

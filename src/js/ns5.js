@@ -5,8 +5,28 @@
  * @private
  */
 function get_validator(schema, key) {
-    return schema[key] || function () {
-        return true; };
+
+    var validator = schema[key];
+
+    // if there is no validator for a value create one that automatically passes
+    if (typeof validator === 'undefined') {
+        return function () {
+            return true;
+        };
+    }
+
+    // if validator is not a function assume it is the name of a registered validator:
+    // e.g. 'isString' ~> NS5.isString
+    // otherwise create a validator that passes if and only if the value is the same
+    // as the validator value:
+    // e.g. '5' ~> function (val) { return val === '5'; }
+    if (!NS5.isFunction(validator)) {
+        validator = NS5[validator] ? NS5[validator] : function (val) {
+            return schema[key] === val;
+        };
+    }
+
+    return validator;
 }
 
 /**
