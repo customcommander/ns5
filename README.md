@@ -1,10 +1,24 @@
-# NS5 (Experimental)
+# NS5
 
-NS5 is an attempt at making yet another JavaScript objects validation library but
-with an emphasis on simplicity and ease of use.
+```javascript
+var validation_robot = new NS5({
+        version: function (value) {
+            return value === 5;
+        }
+    });
 
-So far the libraries I've seen are like they have been written by Java developers on
-a really bad _AbstractControllerParadigmFactory_ acid trip.
+if ( !validation_robot.test({ version: 9 }) ) {
+    alert('error: version should be 5');
+}
+```
 
-I believe something a bit more chilled out can be achieved and still be fit for
-most common use cases.
+### Yet Another Object Validation Library?
+
+Yes indeed.
+
+Because so far the libraries I've seen look like they have been written by Java developers
+on a really bad _AbstractControllerParadigmFactory_ acid trip.
+
+I don't send rockets over to Mars therefore I believe I deserve some simplicity.
+
+NS5 is an attempt at making a library that is easy to use and yet fit for most common use cases.
