@@ -141,6 +141,11 @@ suite.add(new Y.Test.Case({
         Y.Assert.isFalse(NS5.isFiniteNumber(-Infinity), "expected -Infinity not to be a finite number");
         Y.Assert.isFalse(NS5.isFiniteNumber([])       , "an array is not a number");
         Y.Assert.isFalse(NS5.isFiniteNumber("1")      , "a number withing a string is not a number");
+    },
+
+    'test: NS5.isDate': function () {
+        Y.Assert.isFalse(NS5.isDate([])       , "an array is not a date");
+        Y.Assert.isTrue(NS5.isDate(new Date()), "expected a date to be a date");
     }
 }));
 

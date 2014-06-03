@@ -134,6 +134,18 @@ NS5.isFiniteNumber = function (thing) {
 };
 
 /**
+ * Checks whether a thing is a date.
+ *
+ * @method isDate
+ * @param thing {Any} The value to test.
+ * @return {Boolean}
+ * @static
+ */
+NS5.isDate = function (thing) {
+    return Object.prototype.toString.call(thing) === '[object Date]';
+};
+
+/**
  * Registers a validator globally.
  *
  * @method register
