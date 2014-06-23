@@ -1,4 +1,7 @@
 test:
 	grover tests/unit/testrunner.html
 
-.PHONY: test
+minify:
+	uglifyjs --no-mangle --no-squeeze src/js/ns5.js >build/ns5.min.js
+
+.PHONY: test minify
