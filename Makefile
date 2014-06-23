@@ -1,4 +1,4 @@
-test:
+test: minify
 	grover tests/unit/testrunner.html
 
 minify:
