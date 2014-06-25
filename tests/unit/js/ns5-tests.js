@@ -208,6 +208,21 @@ suite.add(new Y.Test.Case({
         ns5.test(data);
 
         Y.ArrayAssert.itemsAreSame([ 1, 'foo', data, 'bar', 'baz' ], args);
+    },
+
+    'should be available for different instances': function () {
+
+        var fn_name = Y.guid('test');
+
+        NS5.register(fn_name, function () {
+            return true;
+        });
+
+        Y.Assert.isTrue( ( new NS5({ foo: fn_name }) ).test({ foo: 1 }),
+            'expected success for the 1st instance');
+
+        Y.Assert.isTrue( ( new NS5({ foo: fn_name }) ).test({ foo: 1 }),
+            'expected success for the 2nd instance');
     }
 }));
 
