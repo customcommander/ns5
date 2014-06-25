@@ -43,17 +43,38 @@ suite.add(new Y.Test.Case({
 
     name: 'validator function',
 
-    'should receive the value to test as the first argument': function () {
-        var mock = Y.Mock({ foo: function () {} });
-        var ns5  = new NS5(mock);
+    'receive value, key and data as parameters (unregistered validator)': function () {
 
-        Y.Mock.expect(mock, {
-            method: 'foo',
-            args: [1]
+        var ns5;
+        var args;
+        var data = { foo: 1 };
+
+        ns5 = new NS5({
+            foo: function () {
+                args = Y.Array(arguments);
+            }
         });
 
-        ns5.test({ foo: 1 });
-        Y.Mock.verify(mock);
+        ns5.test(data);
+
+        Y.ArrayAssert.itemsAreSame([ 1, 'foo', data ], args);
+    },
+
+    'receive value, key and data as parameters (registered validator)': function () {
+
+        var ns5;
+        var args;
+        var fn_name = Y.guid('test');
+        var data    = { foo: 1 };
+
+        NS5.register(fn_name, function () {
+            args = Y.Array(arguments);
+        });
+
+        ns5 = new NS5({ foo: fn_name });
+        ns5.test(data);
+
+        Y.ArrayAssert.itemsAreSame([ 1, 'foo', data ], args);
     },
 
     'should not return a truthy value to validate': function () {
@@ -174,15 +195,19 @@ suite.add(new Y.Test.Case({
 
     'should pass registered arguments on to the validator': function () {
 
-        var fn_name = Y.guid('test'), ns5;
+        var ns5;
+        var args;
+        var data = { foo: 1 };
+        var fn_name = Y.guid('test');
 
         NS5.register(fn_name, function () {
-            return Y.Array(arguments).join(',') === 'foo,bar,baz';
+            args = Y.Array(arguments);
         }, ['bar', 'baz']);
 
-        ns5 = new NS5({ foo: NS5[fn_name] });
+        ns5 = new NS5({ foo: fn_name });
+        ns5.test(data);
 
-        Y.Assert.isTrue( ns5.test({ foo: 'foo' }) );
+        Y.ArrayAssert.itemsAreSame([ 1, 'foo', data, 'bar', 'baz' ], args);
     }
 }));
 

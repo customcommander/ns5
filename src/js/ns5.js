@@ -165,8 +165,8 @@ NS5.register = function (fn_name, fn, args) {
         return false;
     }
 
-    NS5[fn_name] = function (val) {
-        return fn.apply(null, [val].concat(args));
+    NS5[fn_name] = function (val, key, data) {
+        return fn.apply(null, [ val, key, data ].concat(args));
     };
 
     return NS5[fn_name];
@@ -211,7 +211,7 @@ NS5.prototype.test = function (thing) {
 
     for (key in thing) {
         validator = get_validator(this._schema, key);
-        if ( validator(thing[key]) !== true ) {
+        if ( validator(thing[key], key, thing) !== true ) {
             return false;
         }
     }
