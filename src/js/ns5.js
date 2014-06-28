@@ -32,6 +32,36 @@ function get_validator(schema, key) {
 /**
  * NS5 Validation Class
  *
+ * NS5 validates objects with the help of a schema.
+ *
+ * A schema is a key/function pairs object where `key` is the name of a property
+ * and `function` a function that will test its value.
+ * There must be one pair for each property that requires validation
+ *
+ * If `function` returns false then the value of `key` is deemed invalid and the
+ * whole validation process fails. When NS5 encounters a property that doesn't
+ * exist in the schema it automatically validates its value.
+ * Meaning that if you don't care about a property you don't have to include it in the schema.
+ *
+ * @example
+ *     var user_validator = new NS5({
+ *         age: function (value) {
+ *             return value >= 21;
+ *         }
+ *     });
+ *
+ *     // passes
+ *     user_validator.test({
+ *         name: 'john doe',
+ *         age: 37
+ *     });
+ *
+ *     // fails
+ *     user_validator.test({
+ *         name: 'peter pan',
+ *         age: 12
+ *     });
+ *
  * @class NS5
  * @constructor
  * @param schema {Object} The validation schema.
