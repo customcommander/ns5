@@ -30,6 +30,52 @@ function get_validator(schema, key) {
 }
 
 /**
+ * Returns an array with the parameters names of given function.
+ *
+ * @example
+ *     function foo(a, b) {}
+ *     get_function_signature(foo);
+ *     //=> ['a', 'b']
+ *
+ * @param func {Function} The function to analyze.
+ * @return {Array} An array of parameters names.
+ * @private
+ */
+function get_function_signature(func) {
+    var params = func.toString().match( /^function.+?\(([\s\S]*?)\)\s*\{/ );
+    params = params[1].match( /(\w+)/g );
+    return params ? params : [];
+}
+
+/**
+ * Transforms an arguments object to be a key/value pairs object as opposed to an index based array.
+ *
+ * @example
+ *     function foo(a, b) {
+ *         map_arguments(arguments, foo);
+ *         //=> { a: 1000, b: 2000 }
+ *     }
+ *     foo(1000, 2000);
+ *
+ * @param args {Arguments}
+ * @param func {Function}
+ * @return {Object}
+ * @private
+ */
+function map_arguments(args, func) {
+
+    var ret = {},
+        sig = get_function_signature(func),
+        i;
+
+    for ( i = 0 ; i < args.length; i++ ) {
+        ret[ sig[i] ] = args[i];
+    }
+
+    return ret;
+}
+
+/**
  * NS5 Validation Class
  *
  * NS5 validates objects with the help of a schema.
@@ -240,12 +286,19 @@ NS5.register = function (fn_name, fn, args) {
  *     //=> true
  *
  * @method test
- * @param thing {Object}
+ * @param thing {Object|Arguments}
+ * @param [func] {Function}
  * @return {Boolean}
  */
-NS5.prototype.test = function (thing) {
+NS5.prototype.test = function (thing, func) {
 
     var validator, key;
+
+    if ( NS5.isArguments(thing) ) {
+        if ( NS5.isFunction(func) ) {
+            thing = map_arguments(thing, func);
+        }
+    }
 
     if ( !NS5.isObject(thing) ) {
         return true;

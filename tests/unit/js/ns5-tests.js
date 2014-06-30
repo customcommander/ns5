@@ -273,6 +273,41 @@ suite.add(new Y.Test.Case({
     }
 }));
 
+suite.add(new Y.Test.Case({
+
+    name: '.test(thing, func) - method signature',
+
+    'should map thing according to its function signature': function () {
+
+        var baz;
+
+        function foo(/*int*/a, /*int*/b, /*int*/c) {
+            var robot = new NS5({ a: 10, b: 20, c: 30 });
+            return robot.test(arguments, foo);
+        }
+
+        function
+            bar (
+                a,        /* integer */
+                    b,    /* integer */
+                        c /* integer */
+                )
+        {
+            var robot = new NS5({ a: 15, b: 30, c: 45 });
+            return robot.test(arguments, bar);
+        }
+
+        baz = function(a,b,c){
+            var robot = new NS5({ a: 20, b: 40, c: 60 });
+            return robot.test(arguments, baz);
+        };
+
+        Y.Assert.isTrue(foo(10, 20, 30), 'foo failure');
+        Y.Assert.isTrue(bar(15, 30, 45), 'bar failure');
+        Y.Assert.isTrue(baz(20, 40, 60), 'baz failure');
+    }
+}));
+
 Y.Test.Runner.add(suite);
 
 });
