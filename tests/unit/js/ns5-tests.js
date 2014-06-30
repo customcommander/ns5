@@ -156,6 +156,13 @@ suite.add(new Y.Test.Case({
     'test: NS5.isDate': function () {
         Y.Assert.isFalse(NS5.isDate([])       , "an array is not a date");
         Y.Assert.isTrue(NS5.isDate(new Date()), "expected a date to be a date");
+    },
+
+    'test: NS5.isArguments': function () {
+        var arr  = [ 1, 2, 3 ];
+        var args = ( function (a, b, c) { return arguments; }(1, 2, 3) );
+        Y.Assert.isFalse(NS5.isArguments(arr), 'expected [1,2,3] not be an arguments object');
+        Y.Assert.isTrue(NS5.isArguments(args), 'expected arguments to be an arguments object');
     }
 }));
 

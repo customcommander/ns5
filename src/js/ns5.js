@@ -176,6 +176,18 @@ NS5.isDate = function (thing) {
 };
 
 /**
+ * Checks whether a thing is an arguments object.
+ *
+ * @method isArguments
+ * @param thing {Any} The value to test.
+ * @return {Boolean}
+ * @static
+ */
+NS5.isArguments = function (thing) {
+    return Object.prototype.toString.call(thing) === '[object Arguments]';
+};
+
+/**
  * Registers a validator globally.
  *
  * @method register
