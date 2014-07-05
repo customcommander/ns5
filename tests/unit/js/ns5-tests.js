@@ -302,9 +302,14 @@ suite.add(new Y.Test.Case({
             return robot.test(arguments, baz);
         };
 
-        Y.Assert.isTrue(foo(10, 20, 30), 'foo failure');
-        Y.Assert.isTrue(bar(15, 30, 45), 'bar failure');
-        Y.Assert.isTrue(baz(20, 40, 60), 'baz failure');
+        // test() returns true for anything that is not an object.
+        // therefore it can return true for an arguments that couldn't have been
+        // mapped with its originating function signature.
+        // If it returns false then it means that arguments has been mapped
+        // correctly but one of its value ('xyz') is not valid.
+        Y.Assert.isFalse(foo(10, 20, 'xyz'), 'foo failure');
+        Y.Assert.isFalse(bar(15, 30, 'xyz'), 'bar failure');
+        Y.Assert.isFalse(baz(20, 40, 'xyz'), 'baz failure');
     },
 
     'should try using `arguments.callee` if function is not provided': function () {
