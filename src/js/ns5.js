@@ -295,9 +295,14 @@ NS5.prototype.test = function (thing, func) {
     var validator, key;
 
     if ( NS5.isArguments(thing) ) {
-        if ( NS5.isFunction(func) ) {
-            thing = map_arguments(thing, func);
+        // in strict mode you can't ready arguments.callee anymore.
+        // doing so results in an error being thrown.
+        try {
+            func = NS5.isFunction(func) ? func : thing.callee;
+        } catch (e) {
+            throw new Error('NS5.test(): cannot verify arguments without the originating function in strict mode');
         }
+        thing = map_arguments(thing, func);
     }
 
     if ( !NS5.isObject(thing) ) {

@@ -305,6 +305,16 @@ suite.add(new Y.Test.Case({
         Y.Assert.isTrue(foo(10, 20, 30), 'foo failure');
         Y.Assert.isTrue(bar(15, 30, 45), 'bar failure');
         Y.Assert.isTrue(baz(20, 40, 60), 'baz failure');
+    },
+
+    'should try using `arguments.callee` if function is not provided': function () {
+
+        function foo(a, b, c) {
+            var robot = new NS5({a: 10, b: 20, c: 30 });
+            return robot.test(arguments);
+        }
+
+        Y.Assert.isFalse(foo(10, 20, 'panda'));
     }
 }));
 
