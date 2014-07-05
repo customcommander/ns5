@@ -1,5 +1,5 @@
 test: minify
-	grover tests/unit/testrunner.html
+	grover src/tests/unit/testrunner.html
 
 minify:
 	uglifyjs --no-mangle --no-squeeze src/js/ns5.js >build/ns5.min.js
