@@ -1,0 +1,38 @@
+<h1>NS5 - Object Validation Made Simple</h1>
+
+<h2>Getting Started</h2>
+
+<p>Loads the library: e.g.</p>
+
+```html
+<script src="/path/to/ns5.min.js"></script>
+```
+
+<h2>Quick Example</h2>
+
+<p>Say you want to make sure that this guy is 21 or older:</p>
+
+```javascript
+var this_guy = {
+    name: 'john',
+    age: 25
+};
+```
+
+<p>Write an adult validator: e.g.</p>
+
+```javascript
+var is_adult = new NS5({
+    age: function (value) {
+        return value >= 21;
+    }
+});
+```
+
+<p>And then:</p>
+
+```javascript
+if ( is_adult.test(this_guy) ) {
+    // do stuff...
+}
+```
