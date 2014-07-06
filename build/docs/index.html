@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>NS5</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/vendor/prettify/prettify-min.css">
+    <script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+    
+</head>
+<body>
+
+<div id="doc">
+    <h1>NS5</h1>
+
+    
+        <a href="#toc" class="jump">Jump to Table of Contents</a>
+    
+
+    <div class="yui3-g">
+        <div class="yui3-u-3-4">
+            <div id="main">
+                <div class="content"><h1>NS5 - Object Validation Made Simple</h1>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>Loads the library: e.g.</p>
+
+<pre class="code prettyprint lang-html">&lt;script src=&quot;&#x2F;path&#x2F;to&#x2F;ns5.min.js&quot;&gt;&lt;&#x2F;script&gt;</pre>
+
+
+<h2 id="quick-example">Quick Example</h2>
+
+<p>Say you want to make sure that this guy is 21 or older:</p>
+
+<pre class="code prettyprint lang-javascript">var this_guy = {
+    name: &#x27;john&#x27;,
+    age: 25
+};</pre>
+
+
+<p>Write an adult validator: e.g.</p>
+
+<pre class="code prettyprint lang-javascript">var is_adult = new NS5({
+    age: function (value) {
+        return value &gt;= 21;
+    }
+});</pre>
+
+
+<p>And then:</p>
+
+<pre class="code prettyprint lang-javascript">if ( is_adult.test(this_guy) ) {
+    &#x2F;&#x2F; do stuff...
+}</pre>
+
+</div>
+            </div>
+        </div>
+
+        <div class="yui3-u-1-4">
+            <div class="sidebar">
+                
+                    <div id="toc" class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Table of Contents</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="toc">
+<li>
+<a href="#getting-started">Getting Started</a>
+</li>
+<li>
+<a href="#quick-example">Quick Example</a>
+</li>
+</ul>
+                        </div>
+                    </div>
+                
+
+                
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+
+
+</body>
+</html>
