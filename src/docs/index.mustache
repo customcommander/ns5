@@ -1,5 +1,26 @@
 <h1>NS5 - Object Validation Made Simple</h1>
 
+<h2>Introduction</h2>
+
+<p>
+    NS5 is a micro library for validating JavaScript objects using a schema.
+</p>
+
+<p>
+    A schema is a simple key/function pairs object like this:
+</p>
+
+```javascript
+{
+    age: function (value) {
+        return value >= 21;
+    },
+    name: function (value) {
+        return value !== '';
+    }
+}
+```
+
 <h2>Getting Started</h2>
 
 <p>Loads the library: e.g.</p>
