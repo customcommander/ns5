@@ -295,7 +295,7 @@ NS5.prototype.test = function (thing, func) {
     var validator, key;
 
     if ( NS5.isArguments(thing) ) {
-        // in strict mode you can't ready arguments.callee anymore.
+        // in strict mode you can't read arguments.callee anymore.
         // doing so results in an error being thrown.
         try {
             func = NS5.isFunction(func) ? func : thing.callee;
