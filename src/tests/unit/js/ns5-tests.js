@@ -323,6 +323,54 @@ suite.add(new Y.Test.Case({
     }
 }));
 
+suite.add(new Y.Test.Case({
+
+    name: '.pick(thing)',
+
+    'should return thing if it is not an object': function () {
+
+        var ns5 = new NS5({ a: 1 });
+        var arr = [1,2];
+
+        Y.Assert.areSame(arr, ns5.pick(arr)  , 'should have returned an array');
+        Y.Assert.areSame(null, ns5.pick(null), 'should have returned null');
+    },
+
+    'the object that is returned only contains valid values': function () {
+
+        var ns5;
+        var ret;
+
+        ns5 = new NS5({
+            a: 1,
+            b: 'isString',
+            c: function (val) {
+                return val === 'c';
+            }
+        });
+
+        ret = ns5.pick({
+            a: 1,
+            b: 'foo',
+            c: 'c',
+            z: 100
+        });
+
+        Y.ArrayAssert.itemsAreSame(Y.Object.keys(ret)  , ['a', 'b', 'c', 'z'], 'test #1');
+        Y.ArrayAssert.itemsAreSame(Y.Object.values(ret), [1, 'foo', 'c', 100], 'test #2');
+
+        ret = ns5.pick({
+            a: 999,
+            b: [],
+            c: 'xxx',
+            z: 123456
+        });
+
+        Y.ArrayAssert.itemsAreSame(Y.Object.keys(ret)  , ['z']   , 'test #3');
+        Y.ArrayAssert.itemsAreSame(Y.Object.values(ret), [123456], 'test #4');
+    }
+}));
+
 Y.Test.Runner.add(suite);
 
 });

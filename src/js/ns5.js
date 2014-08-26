@@ -319,6 +319,36 @@ NS5.prototype.test = function (thing, func) {
     return true;
 };
 
+/**
+ * Returns a copy of `thing` that only contains valid values.
+ *
+ * If `thing` is not an object it is returned untouched.
+ *
+ * @method pick
+ * @param thing {Object}
+ * @return {Object}
+ * @todo support for arguments
+ */
+NS5.prototype.pick = function (thing) {
+
+    var obj = {},
+        key,
+        validator;
+
+    if ( !NS5.isObject(thing) ) {
+        return thing;
+    }
+
+    for (key in thing) {
+        validator = get_validator(this._schema, key);
+        if ( validator(thing[key], key, thing) === true ) {
+            obj[key] = thing[key];
+        }
+    }
+
+    return obj;
+};
+
 window.NS5 = NS5;
 
 }());
