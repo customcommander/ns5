@@ -368,6 +368,45 @@ suite.add(new Y.Test.Case({
 
         Y.ArrayAssert.itemsAreSame(Y.Object.keys(ret)  , ['z']   , 'test #3');
         Y.ArrayAssert.itemsAreSame(Y.Object.values(ret), [123456], 'test #4');
+    },
+
+    'can accept `arguments`': function () {
+
+        var ret;
+        var ns5 = new NS5({
+            a: 1,
+            b: 'isString',
+            c: function (val) { return val === 'c'; }
+        });
+
+        function foo(
+            a  , /* param a */
+            b  , /* param b */
+            c    /* param c */ ) {
+            return ns5.pick(arguments);
+        }
+
+        ret = foo(1, 'xxx', []);
+
+        Y.ArrayAssert.itemsAreSame(Y.Object.keys(ret)  , ['a', 'b'], 'keys failure');
+        Y.ArrayAssert.itemsAreSame(Y.Object.values(ret), [1, 'xxx'], 'values failure');
+    },
+
+    'throws an error when using `arguments` in strict mode': function () {
+
+        var ns5 = new NS5({
+            a: 1
+        });
+
+// Looks like the "use strict" pragma doesn't work if it is indented. Weird.
+        function foo(a) {
+"use strict";
+            return ns5.pick(arguments);
+        }
+
+        Y.Assert.throwsError(Error, function () {
+            foo([]);
+        });
     }
 }));
 

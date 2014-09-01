@@ -325,15 +325,25 @@ NS5.prototype.test = function (thing, func) {
  * If `thing` is not an object it is returned untouched.
  *
  * @method pick
- * @param thing {Object}
+ * @param thing {Object|Arguments}
+ * @param [func] {Function}
  * @return {Object}
  * @todo support for arguments
  */
-NS5.prototype.pick = function (thing) {
+NS5.prototype.pick = function (thing, func) {
 
     var obj = {},
         key,
         validator;
+
+    if ( NS5.isArguments(thing) ) {
+        try {
+            func = NS5.isFunction(func) ? func : thing.callee;
+        } catch (e) {
+            throw new Error('NS5.pick(): cannot verify arguments without the originating function in strict mode');
+        }
+        thing = map_arguments(thing, func);
+    }
 
     if ( !NS5.isObject(thing) ) {
         return thing;
