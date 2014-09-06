@@ -144,6 +144,22 @@ NS5.isString = function (thing) {
 };
 
 /**
+ * Checks that a thing is a string that is neither empty nor just white spaces.
+ *
+ * @method isNotEmptyString
+ * @param thing {Any} The value to test.
+ * @return {Boolean}
+ * @static
+ */
+NS5.isNotEmptyString = function (thing) {
+    if (typeof thing !== 'string') {
+        return false;
+    }
+    thing = thing.replace(/^\s+/, '').replace(/\s+$/, '');
+    return thing !== '';
+};
+
+/**
  * Checks whether a thing is a boolean.
  *
  * @method isBoolean

@@ -163,6 +163,13 @@ suite.add(new Y.Test.Case({
         var args = ( function (a, b, c) { return arguments; }(1, 2, 3) );
         Y.Assert.isFalse(NS5.isArguments(arr), 'expected [1,2,3] not be an arguments object');
         Y.Assert.isTrue(NS5.isArguments(args), 'expected arguments to be an arguments object');
+    },
+
+    'test: NS5.isNotEmptyString': function () {
+        Y.Assert.isFalse(NS5.isNotEmptyString([])        , 'should have failed because thing is not a string');
+        Y.Assert.isFalse(NS5.isNotEmptyString('')        , 'should have failed because thing is an empty string');
+        Y.Assert.isFalse(NS5.isNotEmptyString(" \t\r\n "), 'should have failed because thing is a whitespace string');
+        Y.Assert.isTrue(NS5.isNotEmptyString("\na b\t ") , 'should have succeeded because thing is not an empty string');
     }
 }));
 
