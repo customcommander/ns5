@@ -15,12 +15,27 @@ function get_validator(schema, key) {
         };
     }
 
+    // if validator is an array returns a new validator that validates only if a value
+    // can be found in that array. this supports the following schema:
+    // new NS5({
+    //     foo: ['bar', 'baz', 'bat']
+    // });
+    else if (NS5.isArray(validator)) {
+        return (function (arr) {
+            return function (value) {
+                var i = arr.length-1, found;
+                while (!(found = (arr[i] === value)) && --i>=0);
+                return found;
+            };
+        }(validator));
+    }
+
     // if validator is not a function assume it is the name of a registered validator:
     // e.g. 'isString' ~> NS5.isString
     // otherwise create a validator that passes if and only if the value is the same
     // as the validator value:
     // e.g. '5' ~> function (val) { return val === '5'; }
-    if (!NS5.isFunction(validator)) {
+    else if (!NS5.isFunction(validator)) {
         validator = NS5[validator] ? NS5[validator] : function (val) {
             return schema[key] === val;
         };

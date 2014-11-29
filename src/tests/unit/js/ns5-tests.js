@@ -91,6 +91,28 @@ suite.add(new Y.Test.Case({
     }
 }));
 
+// Test case for when an array is used in a schema
+suite.add(new Y.Test.Case({
+
+    name: 'validator: array',
+
+    init: function () {
+        this.ns5 = new NS5({ foo: [ 'bar', '1' ] });
+    },
+
+    'validates if value is found in the array': function () {
+        Y.Assert.isTrue( this.ns5.test({ foo: 'bar' }) );
+    },
+
+    'when searching for an element, use strict equality only': function () {
+        Y.Assert.isFalse( this.ns5.test({ foo: 1 }));
+    },
+
+    'fails if value is not found in the array': function () {
+        Y.Assert.isFalse( this.ns5.test({ foo: 'xxx' }) );
+    }
+}));
+
 suite.add(new Y.Test.Case({
 
     name: 'built-in validators',
