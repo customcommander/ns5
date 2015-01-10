@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8"/>
         <script src="http://yui.yahooapis.com/3.17.1/build/yui/yui-min.js"></script>
-        <title></title>
     </head>
     <body>
+
+        <iframe id="frm1"
+            srcdoc="
+                <html>
+                    <body>
+                        <script>var arr=[10,11];</script>
+                    </body>
+                </html>"
+            frameborder="0"
+            sandbox="allow-same-origin allow-scripts"
+            seamless></iframe>
+
         <script>
             YUI({
                 modules: {
@@ -16,7 +28,7 @@
                         requires: [ 'test', 'ns5' ]
                     }
                 }
-            }).use('ns5-tests', function (Y) {
+            }).use('node', 'ns5-tests', function (Y) {
                 Y.Test.Runner.run();
             });
         </script>

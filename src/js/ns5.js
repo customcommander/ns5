@@ -206,7 +206,7 @@ NS5.isFunction = function (thing) {
  * @return {Boolean}
  * @static
  */
-NS5.isArray = Array.isArray || function (thing) {
+NS5.isArray = function (thing) {
     return Object.prototype.toString.call(thing) === '[object Array]';
 };
 

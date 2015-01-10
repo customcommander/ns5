@@ -139,8 +139,14 @@ suite.add(new Y.Test.Case({
     },
 
     'test: NS5.isArray': function () {
+
+        var arr_from_outer_space;
+
         Y.Assert.isTrue(NS5.isArray([]) , "expected '[]' to have succeeded");
         Y.Assert.isFalse(NS5.isArray({}), "expected '{}' to have failed");
+
+        arr_from_outer_space = Y.one('#frm1').getDOMNode().contentWindow.arr;
+        Y.Assert.isTrue(NS5.isArray(arr_from_outer_space), "expected '[]' from a different context to be an array");
     },
 
     'test: NS5.isBoolean': function () {
